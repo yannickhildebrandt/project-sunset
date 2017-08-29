@@ -36,14 +36,14 @@ public class TimeCalculator {
 
     private int checkForSunrise(ArrayList<LocationObject> locationList, double modifier) {
         for (int i = 1; i <= locationList.size(); i++) {
-            if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunriseTime() + locationList.get(i).getModifierValue() * modifier)) {return i;}
+            if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunriseTime() + (locationList.get(i).getModifierValue() * modifier))) {return i;}
         }
         return -1;
     }
 
     private int checkForSunset(ArrayList<LocationObject> locationList, double modifier) {
         for (int i = 1; i <= locationList.size(); i++) {
-            if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunsetTime() + locationList.get(i).getModifierValue() * modifier)) {return i;}
+            if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunsetTime() + (locationList.get(i).getModifierValue() * modifier))) {return i;}
         }
         return -1;
     }

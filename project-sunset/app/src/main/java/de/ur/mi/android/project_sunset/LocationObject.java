@@ -15,6 +15,16 @@ public class LocationObject {
     private int arrivalTime;
     private int modifierValue;
 
+    /**
+     * @param name The name of the waypoint/fix
+     * @param longitude The longitude of the waypoint
+     * @param latitude The latitude of the waypoint
+     * @param sunriseTime The time the sun rises at this certain location in seconds after midnight. Has to be converted to UTC!
+     * @param sunsetTime The time the sun sets at this certain location in seconds after midnight. Has to be converted to UTC!
+     * @param arrivalTime The time the user arrives at this certain location in seconds after midnight. Has to be converted to UTC!
+     * @param modifierValue A modifier depending on the current weather situation
+     */
+
     public LocationObject(String name, long longitude, long latitude, int sunriseTime, int sunsetTime, int arrivalTime, int modifierValue){
         this.name = name;
         this.longitude = longitude;
