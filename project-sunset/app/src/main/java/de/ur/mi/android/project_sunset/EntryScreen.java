@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class EntryScreen extends AppCompatActivity {
+
+
     Button newCalculation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +16,7 @@ public class EntryScreen extends AppCompatActivity {
         setContentView(R.layout.entryscreen);
         initUI();
         setOnClickListener();
+
 
 
     }

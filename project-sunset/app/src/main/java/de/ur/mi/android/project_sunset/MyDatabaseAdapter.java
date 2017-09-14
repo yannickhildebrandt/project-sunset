@@ -12,16 +12,18 @@ public class MyDatabaseAdapter {
     private SQLiteDatabase db;
 
     // Datenbanksetup
-    public static final String DB_NAME = "my-app-db";
+    public static final String DB_NAME = "wayPointsDB";
     public static final int DB_VERSION = 1;
 
     // Relationenmodell
     // 3 Spalten in der Tabelle my-example-table
     // _id, first-example, second-example
-    public static final String TABLE_EXAMPLE = "my-example-table";
+    public static final String TABLE_EXAMPLE = "waypointTable";
     public static final String KEY_ID = "_id";
-    public static final String KEY_FIRST_EXAMPLE = "first-example";
-    public static final String KEY_SECOND_EXAMPLE = "second-example";
+    public static final String KEY_IDENT = "ident";
+    public static final String KEY_LATITUDE = "latitude";
+    public static final String KEY_LONGITUDE = "longitude";
+    public static final String KEY_TYPE = "type";
 
     public MyDatabaseAdapter(Context context) {
         helper = new MyDatabaseHelper(context, DB_NAME, null, DB_VERSION);
@@ -46,15 +48,15 @@ public class MyDatabaseAdapter {
         // nutzt Schl¸ssel-Wert-Mechanismus
         // es werden die Konstanten v. o. genutzt, um Fehler zu vermeiden
         ContentValues v = new ContentValues();
-        v.put(KEY_FIRST_EXAMPLE, myExampleObject.toString());
-        v.put(KEY_SECOND_EXAMPLE, myExampleObject.toString()); // exemparisch einfach toString()
+        v.put(KEY_ID, myExampleObject.toString());
+        v.put(KEY_IDENT, myExampleObject.toString()); // exemparisch einfach toString()
         long newInsertId = db.insert(TABLE_EXAMPLE, null, v);
         return newInsertId;
     }
 
     // Beispielmethode: alle Eintr‰ge aus my-example-table holen
     public Cursor getAllMyObjects() {
-        String[] allColumns = new String[] { KEY_ID, KEY_FIRST_EXAMPLE, KEY_SECOND_EXAMPLE };
+        String[] allColumns = new String[] { KEY_ID, KEY_IDENT, KEY_LATITUDE,KEY_LONGITUDE,KEY_TYPE};
         Cursor results = db.query(TABLE_EXAMPLE, allColumns, null, null, null, null, null);
         return results;
     }
@@ -74,8 +76,7 @@ public class MyDatabaseAdapter {
     private class MyDatabaseHelper extends SQLiteOpenHelper {
 
         // Hier wird ¸ber das SQL Statement das Datenmodell festgelegt
-        private static final String CREATE_DB = "create table " + TABLE_EXAMPLE + " (" + KEY_ID + " integer primary key autoincrement, " + KEY_FIRST_EXAMPLE + " text not null, " + KEY_SECOND_EXAMPLE + " text not null);";
-
+        private static final String CREATE_DB = "create table " + TABLE_EXAMPLE + " (" + KEY_ID + " integer primary key autoincrement, " + KEY_IDENT + " text not null, " + KEY_LATITUDE + " text not null" + KEY_LONGITUDE+" text not null" + KEY_TYPE +" text not null"+");";
         public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
         }
