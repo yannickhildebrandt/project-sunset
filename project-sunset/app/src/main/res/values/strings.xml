@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">project-sunset</string>
+    <string name="entry_button">Neue Berechnung starten</string>
+    <string name="sunset">Sonnenaufgang</string>
+    <string name="sundown">Sonnenuntergang</string>
+    <string name="informationWaypoint">Informationen für diesen Waypoint eingeben</string>
+    <string name="hintWaypoint">Name des Waypoints</string>
+    <string name="hintLatitude">Breitengrad des Waypoints</string>
+    <string name="hintLongitude">Längengrad des Waypoints</string>
+    <string name="hintTime">Zeitpunkt des Erreichens</string>
+    <string name="buttonCalculator">Umrechner</string>
+    <string name="buttonNextWaypoint">Nächster Waypoint</string>
+    <string name="buttonCalculate">Berechnen</string>
+    <string name="calculatorTitle">Umrechner für Grad/Minuten in Dezimalwert</string>
+    <string name="hintGrad">Grad eingeben</string>
+    <string name="hintMinutes">Minuten eingeben</string>
+    <string name="buttonCalculateTo">Umrechnen</string>
+    <string name="resultCalculatorTitle">Der eingegebene Wert in Dezimalform</string>
+    <string name="resultSunsetTitle">Der Sonnenaufgangszeitpunkt</string>
+    <string name="textNoClouds">Bei keiner Bewölkung: </string>
+    <string name="textFewClouds">Bei mäßiger Bewölkung: </string>
+    <string name="textClouds">Bei starker Bewölkung: </string>
+    <string name="textPosition">Position bei Sonnenaufgang: </string>
 </resources>
