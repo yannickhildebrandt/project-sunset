@@ -43,13 +43,16 @@ public class MyDatabaseAdapter {
     // Datenmanipulation: Methoden
 
     // Beispielmethode: Objekt in my-example-table einf¸gen
-    public long insertMyObject(Object myExampleObject) {
+    public long insertMyObject(WaypointObject waypointObject) {
         // Datensammlung f¸r den einzuf¸genden Datensatz erstellen (ContentValues)
         // nutzt Schl¸ssel-Wert-Mechanismus
         // es werden die Konstanten v. o. genutzt, um Fehler zu vermeiden
         ContentValues v = new ContentValues();
-        v.put(KEY_ID, myExampleObject.toString());
-        v.put(KEY_IDENT, myExampleObject.toString()); // exemparisch einfach toString()
+        v.put(KEY_ID,waypointObject.getId());
+        v.put(KEY_IDENT, waypointObject.getIdent()); // exemparisch einfach toString()
+        v.put(KEY_LATITUDE,waypointObject.getLatitude());
+        v.put(KEY_LONGITUDE,waypointObject.getLongitude());
+        v.put(KEY_TYPE,waypointObject.getType());
         long newInsertId = db.insert(TABLE_EXAMPLE, null, v);
         return newInsertId;
     }
@@ -76,7 +79,7 @@ public class MyDatabaseAdapter {
     private class MyDatabaseHelper extends SQLiteOpenHelper {
 
         // Hier wird ¸ber das SQL Statement das Datenmodell festgelegt
-        private static final String CREATE_DB = "create table " + TABLE_EXAMPLE + " (" + KEY_ID + " integer primary key autoincrement, " + KEY_IDENT + " text not null, " + KEY_LATITUDE + " text not null" + KEY_LONGITUDE+" text not null" + KEY_TYPE +" text not null"+");";
+        private static final String CREATE_DB = "create table " + TABLE_EXAMPLE + " (" + KEY_ID + " text not null, " + KEY_IDENT + " text not null, " + KEY_LATITUDE + " text not null" + KEY_LONGITUDE+" text not null" + KEY_TYPE +" text not null"+");";
         public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
         }
