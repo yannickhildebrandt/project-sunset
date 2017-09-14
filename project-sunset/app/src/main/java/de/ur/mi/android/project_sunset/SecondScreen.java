@@ -36,7 +36,7 @@ public class SecondScreen extends AppCompatActivity {
 
 
     }
-
+// Onclicklistener setzen -- meist noch leer
     private void setOnClickListener() {
         final Intent calculatorIntent = new Intent(this,Calculator.class);
         calculatorButton.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +45,22 @@ public class SecondScreen extends AppCompatActivity {
                 startActivity(calculatorIntent);
             }
         });
-    }
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        nextWaypoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+    }
+// UI Elemente Initialisieren
     private void initUI() {
         sunsetRadioButton = (RadioButton) findViewById(R.id.sunsetRadioButton);
         sundownRadioButton = (RadioButton) findViewById(R.id.sundownRadioButton);
