@@ -6,13 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class MyDatabaseAdapter {
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-    private MyDatabaseHelper helper;
+public class MyDatabaseAdapter extends SQLiteAssetHelper {
+
+    //private MyDatabaseHelper helper;
     private SQLiteDatabase db;
 
     // Datenbanksetup
-    public static final String DB_NAME = "wayPointsDB";
+    public static final String DB_NAME = "waypoints";
     public static final int DB_VERSION = 1;
 
     // Relationenmodell
@@ -26,18 +28,19 @@ public class MyDatabaseAdapter {
     public static final String KEY_TYPE = "type";
 
     public MyDatabaseAdapter(Context context) {
-        helper = new MyDatabaseHelper(context, DB_NAME, null, DB_VERSION);
+        //helper = new MyDatabaseHelper(context, DB_NAME, null, DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     // ÷ffnen der Datenbankverbindung
     public void open() {
-        db = helper.getWritableDatabase();
+        db = getWritableDatabase();
     }
 
     // Schlieﬂen der Datenbankverbindung
     public void close() {
         db.close();
-        helper.close();
+        //helper.close();
     }
 
     // Datenmanipulation: Methoden
@@ -74,7 +77,7 @@ public class MyDatabaseAdapter {
 
 
 
-
+/**
     // Interne Ableitung der Hilfsklasse SQLiteOpenHelper zur Erstellung der Tabellen
     private class MyDatabaseHelper extends SQLiteOpenHelper {
 
@@ -94,7 +97,5 @@ public class MyDatabaseAdapter {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Upgrage bei Versions‰nderung: Wie hat sich das Datenmodell ver‰ndert? Immer individuell je nach Datenbankversion!
         }
-    }
+    } **/
 }
-
-

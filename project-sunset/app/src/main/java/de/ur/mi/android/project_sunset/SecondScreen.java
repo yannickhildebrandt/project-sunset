@@ -33,9 +33,8 @@ public class SecondScreen extends AppCompatActivity {
         setContentView(R.layout.second_screen);
         initUI();
         setOnClickListener();
-
-
     }
+
 // Onclicklistener setzen -- meist noch leer
     private void setOnClickListener() {
         final Intent calculatorIntent = new Intent(this,Calculator.class);
