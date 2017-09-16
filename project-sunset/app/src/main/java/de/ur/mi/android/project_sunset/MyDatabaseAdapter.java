@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -14,7 +15,7 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
     private SQLiteDatabase db;
 
     // Datenbanksetup
-    public static final String DB_NAME = "waypoints";
+    public static final String DB_NAME = "waypoints.db";
     public static final int DB_VERSION = 1;
 
     // Relationenmodell
@@ -32,70 +33,39 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    // ÷ffnen der Datenbankverbindung
+    //opens a database connection
     public void open() {
-        db = getWritableDatabase();
+        db = this.getWritableDatabase();
     }
 
-    // Schlieﬂen der Datenbankverbindung
+    //closes a database connection
     public void close() {
         db.close();
-        //helper.close();
-    }
-
-    // Datenmanipulation: Methoden
-
-    // Beispielmethode: Objekt in my-example-table einf¸gen
-    public long insertMyObject(WaypointObject waypointObject) {
-        // Datensammlung f¸r den einzuf¸genden Datensatz erstellen (ContentValues)
-        // nutzt Schl¸ssel-Wert-Mechanismus
-        // es werden die Konstanten v. o. genutzt, um Fehler zu vermeiden
-        ContentValues v = new ContentValues();
-        v.put(KEY_ID,waypointObject.getId());
-        v.put(KEY_IDENT, waypointObject.getIdent()); // exemparisch einfach toString()
-        v.put(KEY_LATITUDE,waypointObject.getLatitude());
-        v.put(KEY_LONGITUDE,waypointObject.getLongitude());
-        v.put(KEY_TYPE,waypointObject.getType());
-        long newInsertId = db.insert(TABLE_EXAMPLE, null, v);
-        return newInsertId;
-    }
-
-    // Beispielmethode: alle Eintr‰ge aus my-example-table holen
-    public Cursor getAllMyObjects() {
-        String[] allColumns = new String[] { KEY_ID, KEY_IDENT, KEY_LATITUDE,KEY_LONGITUDE,KEY_TYPE};
-        Cursor results = db.query(TABLE_EXAMPLE, allColumns, null, null, null, null, null);
-        return results;
     }
 
 
-    // Beispielmethode: Ein myObject-Tupel lˆschen
-    public void removeMyObject(long id) {
-        String toDelete = KEY_ID + "=?";
-        String[] deleteArgs = new String[] { String.valueOf(id) };
-        db.delete(TABLE_EXAMPLE, toDelete, deleteArgs);
-    }
+    /**
+     * Creates a Waypoint object from the waypoint database
+     * @param name selects which waypoint is choosen
+     * @return a WaypointObject with all information for the selected waypoint
+     */
+    public WaypointObject getWaypointObjectByName(String name) {
+        String tableName = "waypoints";
+        String[] tableColumns = new String[] {"ID" , "IDENT", "LATITUDE", "LONGITUDE", "TYPE"};
+        String whereClause = "IDENT = ?";
+        String[] whereArgs = new String[] {name};
+        String oderBy = "ID";
 
-
-
-/**
-    // Interne Ableitung der Hilfsklasse SQLiteOpenHelper zur Erstellung der Tabellen
-    private class MyDatabaseHelper extends SQLiteOpenHelper {
-
-        // Hier wird ¸ber das SQL Statement das Datenmodell festgelegt
-        private static final String CREATE_DB = "create table " + TABLE_EXAMPLE + " (" + KEY_ID + " text not null, " + KEY_IDENT + " text not null, " + KEY_LATITUDE + " text not null" + KEY_LONGITUDE+" text not null" + KEY_TYPE +" text not null"+");";
-        public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-            super(context, name, factory, version);
+        try {
+            Cursor c = db.query(tableName, tableColumns, whereClause, whereArgs, null, null, oderBy);
+            if (c != null) {c.moveToFirst();}
+            WaypointObject result = new WaypointObject(Integer.parseInt(c.getString(0)), c.getString(1), Float.parseFloat(c.getString(2)), Float.parseFloat(c.getString(3)), c.getString(4));
+            return result;
         }
-
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_DB);
+        catch (Exception e) {
+            Log.d("CREATION",e.toString());
         }
+        return null;
+    }
 
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Upgrage bei Versions‰nderung: Wie hat sich das Datenmodell ver‰ndert? Immer individuell je nach Datenbankversion!
-        }
-    } **/
 }

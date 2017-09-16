@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,14 @@ public class SecondScreen extends AppCompatActivity {
         setContentView(R.layout.second_screen);
         initUI();
         setOnClickListener();
+        MyDatabaseAdapter mda = new MyDatabaseAdapter(this);
+        Log.d("CREATION","Datbase Created");
+        mda.open();
+        Log.d("CREATION","Database opend");
+        Log.d("CREATION",mda.getWaypointObjectByName("GOSHU").toString());
+        mda.close();
+        Log.d("CREATION","Database closed");
+
     }
 
 // Onclicklistener setzen -- meist noch leer

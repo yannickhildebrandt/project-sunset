@@ -29,6 +29,7 @@ public class EntryScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.entryscreen);
+        Log.d("CREATION","Welcome");
         initUI();
         setOnClickListener();
     }

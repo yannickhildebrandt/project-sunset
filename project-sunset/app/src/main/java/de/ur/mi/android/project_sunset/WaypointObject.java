@@ -1,9 +1,5 @@
 package de.ur.mi.android.project_sunset;
 
-/**
- * Created by yannickhildebrandt on 14/09/17.
- */
-
 public class WaypointObject {
     private int id;
     private String ident;
