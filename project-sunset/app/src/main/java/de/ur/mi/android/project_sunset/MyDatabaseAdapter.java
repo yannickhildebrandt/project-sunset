@@ -43,7 +43,6 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
         db.close();
     }
 
-
     /**
      * Creates a Waypoint object from the waypoint database
      * @param name selects which waypoint is choosen

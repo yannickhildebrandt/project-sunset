@@ -8,8 +8,8 @@ public class LocationObject {
 
     //Time is given in seconds
     private String name;
-    private long longitude;
-    private long latitude;
+    private Float longitude;
+    private Float latitude;
     private int sunriseTime;
     private int sunsetTime;
     private int arrivalTime;
@@ -25,7 +25,7 @@ public class LocationObject {
      * @param modifierValue A modifier depending on the current weather situation
      */
 
-    public LocationObject(String name, long longitude, long latitude, int sunriseTime, int sunsetTime, int arrivalTime, int modifierValue){
+    public LocationObject(String name, Float longitude, Float latitude, int sunriseTime, int sunsetTime, int arrivalTime, int modifierValue){
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -37,9 +37,9 @@ public class LocationObject {
 
     public String getName() {return name;}
 
-    public long getLongitude() {return longitude;}
+    public Float getLongitude() {return longitude;}
 
-    public long getLatitude() {return latitude;}
+    public Float getLatitude() {return latitude;}
 
     public int getSunriseTime() {return sunriseTime;}
 
@@ -48,4 +48,7 @@ public class LocationObject {
     public int getArrivalTime() {return arrivalTime;}
 
     public int getModifierValue() {return modifierValue;}
+
+    @Override
+    public String toString() {return "" + name + " " + longitude + " " + latitude + " " + sunriseTime + " " + sunsetTime + " " + arrivalTime + " " + modifierValue;}
 }

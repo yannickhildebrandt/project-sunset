@@ -19,5 +19,4 @@ public class ResultObject {
         this.posLongitude = posLongitude;
         this.posLatitude = posLatitude;
     }
-
 }

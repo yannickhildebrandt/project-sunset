@@ -38,6 +38,6 @@ public class WaypointObject {
 
     @Override
     public String toString() {
-        return ""+ id + " " + ident +" "+ latitude+" "+ longitude+" "+ type +" ";
+        return "" + id + " " + ident + " " + latitude + " " + longitude + " " + type + " ";
     }
 }
