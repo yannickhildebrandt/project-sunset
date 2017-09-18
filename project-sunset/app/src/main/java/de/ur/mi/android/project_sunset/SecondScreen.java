@@ -1,20 +1,20 @@
 package de.ur.mi.android.project_sunset;
 
-/**
- * Created by yannickhildebrandt on 14/09/17.
- */
-
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -22,17 +22,17 @@ import java.util.TimeZone;
 import static java.util.Calendar.HOUR_OF_DAY;
 
 public class SecondScreen extends AppCompatActivity {
-    RadioButton sunsetRadioButton;
-    RadioButton sundownRadioButton;
-    RadioButton waypointNameRadioButton;
-    RadioButton waypointDataRadioButton;
     EditText waypointName;
     EditText waypointLongitude;
     EditText waypointLatitude;
-    EditText waypointTime;
     Button calculatorButton;
     Button nextWaypoint;
     Button calculateButton;
+    Button pickTime;
+    TextView arrivalTimeText;
+
+    private final static String ARRAYLIST_EXTRA_ID = "ArraylistExtra";
+    private final static String BUNDLE_EXTRA_ID = "bundleExtra";
 
     ArrayList<LocationObject> locList;
     int arrivalTimeInSec;
@@ -47,16 +47,25 @@ public class SecondScreen extends AppCompatActivity {
         if (getIntent().getExtras() == null) {calculateButton.setEnabled(false);}
         initLocationList();
 
+        //Platzhalter bis Timepicker implementiert ist
+        arrivalTimeInSec = -1;
     }
 
     private void initLocationList() {
         Intent i = getIntent();
-        if (i == null) {locList = new ArrayList<LocationObject>();}
-        else {}//get Intentextra
+        if (i.getExtras() == null) {
+            locList = new ArrayList<LocationObject>();
+            Log.d("ZZZ", "Arraylist created");}
+        else {
+            Bundle args = i.getBundleExtra(BUNDLE_EXTRA_ID);
+            locList = (ArrayList<LocationObject>) args.getSerializable(ARRAYLIST_EXTRA_ID);
+            for (LocationObject k: locList){
+                Log.e("ZZZ", k.toString());
+            }
+        }
 
     }
 
-    // Onclicklistener setzen -- meist noch leer
     private void setOnClickListener() {
         final Intent calculatorIntent = new Intent(this,Calculator.class);
         final Intent secondScreenIntent = new Intent(this, SecondScreen.class);
@@ -69,34 +78,36 @@ public class SecondScreen extends AppCompatActivity {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (waypointName.getText().toString().length() != 5){Toast.makeText(getBaseContext(), "Name muss 5 Zeichen lang sein!",Toast.LENGTH_SHORT).show();}
-                else {}
+                if (checkCorrectInput()) {}
             }
         });
         nextWaypoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (waypointName.getText().toString().length() != 5){Toast.makeText(getBaseContext(), "Name muss 5 Zeichen lang sein!", Toast.LENGTH_SHORT).show();}
-                else {
-                    locList.add(createLocationObject());
-                    startActivity(secondScreenIntent);
-                }
+               if (checkCorrectInput()) {
+                   LocationObject tempObj = createLocationObject();
+                   if (tempObj != null) {
+                       locList.add(tempObj);
+                       Log.d("ZZZ", "added to Arraylist");
+                       Bundle args = new Bundle();
+                       args.putSerializable(ARRAYLIST_EXTRA_ID, locList);
+                       secondScreenIntent.putExtra(BUNDLE_EXTRA_ID, args);
+                       startActivity(secondScreenIntent);
+                   }
+               }
             }
         });
 
-        /**
-         * Platzhalter für Button-OnClickListener
-         * waypointName.setOnClickListener(new View.OnClickListener() {
+          pickTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 timePickerPopup();
             }
-        }); **/
-
+        });
     }
 
     private LocationObject createLocationObject() {
-        String name = waypointName.getText().toString();
+        String name = waypointName.getText().toString().toUpperCase();
         MyDatabaseAdapter mda = new MyDatabaseAdapter(this);
         mda.open();
         WaypointObject loc = mda.getWaypointObjectByName(name);
@@ -106,36 +117,38 @@ public class SecondScreen extends AppCompatActivity {
             Float longitude = loc.getLongitude();
             Float latitude = loc.getLatitude();
             //Beispielwerte
-            int one = 1;
-            int two = 2;
+            int one = -1;
+            int two = -1;
             int three = arrivalTimeInSec;
-            int four = 4;
+            int four = -1;
             return new LocationObject(name, longitude, latitude, one, two, three ,four);
         }
         return null;
     }
 
-    // UI Elemente Initialisieren
+    private boolean checkCorrectInput(){
+        if (waypointName.getText().toString().length() != 5) {Toast.makeText(getBaseContext(), "Name muss 5 Zeichen lang sein!", Toast.LENGTH_SHORT).show();}
+        else if (arrivalTimeInSec == -1) {Toast.makeText(getBaseContext(), "Ankunftszeit darf nicht leer sein!", Toast.LENGTH_SHORT).show();}
+        else {return true;}
+        return false;
+    }
+
     private void initUI() {
-        sunsetRadioButton = (RadioButton) findViewById(R.id.sunsetRadioButton);
-        sundownRadioButton = (RadioButton) findViewById(R.id.sundownRadioButton);
-        waypointNameRadioButton = (RadioButton) findViewById(R.id.WaypointNameRadioButton);
-        waypointDataRadioButton = (RadioButton) findViewById(R.id.radioButtonWaypointData);
         waypointName = (EditText) findViewById(R.id.WaypointNameEdit);
         waypointLongitude = (EditText) findViewById(R.id.waypointLongitudeEdit);
         waypointLatitude = (EditText) findViewById(R.id.waypointLatitudeEdit);
-        waypointTime = (EditText) findViewById(R.id.waypoint_time);
         calculatorButton = (Button) findViewById(R.id.calculatorButton);
         nextWaypoint = (Button) findViewById(R.id.nextWaypointButton);
         calculateButton = (Button) findViewById(R.id.buttonCalculate);
-
+        pickTime = (Button) findViewById(R.id.setTimeButton);
+        arrivalTimeText = (TextView) findViewById(R.id.arrivaltime);
     }
 
     public void timePickerPopup() {
         Calendar cal = Calendar.getInstance(TimeZone.getDefault());
         TimePickerDialog timePicker = new TimePickerDialog(this, R.style.AppTheme, datePickerListener, cal.get(HOUR_OF_DAY), cal.get(HOUR_OF_DAY), true);
         timePicker.setCancelable(false);
-        timePicker.setTitle("Select the date");
+        timePicker.setTitle("Wähle die Ankunftszeit");
         timePicker.show();
     }
 
@@ -144,9 +157,7 @@ public class SecondScreen extends AppCompatActivity {
             arrivalTimeInSec = (selectedHour * 3600) + (selectedMinute * 60);
             String hour = String.valueOf(selectedHour);
             String minute = String.valueOf(selectedMinute);
-            waypointTime.setText( minute + ":" + hour);
+            arrivalTimeText.setText("Zeitpunkt des Erreichens: " + hour + ":" + minute);
         }
     };
-
-
 }

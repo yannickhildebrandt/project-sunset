@@ -7,19 +7,17 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class EntryScreen extends AppCompatActivity {
     Intent intent;
-    Button newCalculation;
     RelativeLayout layout;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.entryscreen);
-        Log.d("CREATION","Welcome");
+        Log.d("ZZZ","Welcome");
         initUI();
         setOnClickListener();
     }

@@ -2,24 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RadioButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sunset"
-        android:id="@+id/sunsetRadioButton"
-        android:layout_marginTop="34dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <RadioButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sundown"
-        android:id="@+id/sundownRadioButton"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/sunsetRadioButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/informationWaypoint"
@@ -28,24 +10,6 @@
         android:text="@string/informationWaypoint"
         android:textColor="@android:color/black"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/sundownRadioButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/WaypointNameRadioButton"
-        android:layout_marginTop="31dp"
-        android:layout_below="@+id/informationWaypoint"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <RadioButton
-        android:id="@+id/radioButtonWaypointData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/waypointLongitudeEdit"
-        android:layout_alignBottom="@+id/waypointLongitudeEdit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -53,68 +17,75 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/WaypointNameEdit"
-
         android:hint="@string/hintWaypoint"
-        android:layout_alignBaseline="@+id/WaypointNameRadioButton"
-        android:layout_alignBottom="@+id/WaypointNameRadioButton"
-        android:layout_alignLeft="@+id/waypointLongitudeEdit"
-        android:layout_alignStart="@+id/waypointLongitudeEdit"
-        />
+        android:inputType="textCapCharacters"
+        android:layout_below="@+id/informationWaypoint"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
 
     <EditText
         android:id="@+id/waypointLongitudeEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
         android:hint="@string/hintLongitude"
-        android:layout_below="@+id/WaypointNameRadioButton"
-        android:layout_toRightOf="@+id/radioButtonWaypointData"
-        android:layout_toEndOf="@+id/radioButtonWaypointData"
-        android:layout_marginTop="36dp"
-        android:inputType="numberDecimal|numberSigned"/>
+        android:inputType="numberDecimal|numberSigned"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/WaypointNameEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/waypointLatitudeEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:hint="@string/hintLatitude"
         android:layout_below="@+id/waypointLongitudeEdit"
         android:layout_alignLeft="@+id/waypointLongitudeEdit"
         android:layout_alignStart="@+id/waypointLongitudeEdit"
         android:inputType="numberDecimal|numberSigned"/>
 
-    <EditText
-        android:id="@+id/waypoint_time"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hintTime"
-        android:layout_below="@+id/waypointLatitudeEdit"
-        android:layout_alignLeft="@+id/waypointLatitudeEdit"
-        android:layout_alignStart="@+id/waypointLatitudeEdit"
-        android:clickable="true"
-        />
+        android:id="@+id/arrivalLayout"
+        android:layout_below="@id/waypointLatitudeEdit"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/arrivaltime"
+            android:text="Zeitpunkt des Erreichens: "
+            android:layout_weight="0.50"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/setTimeButton"
+            android:text="Zeitpunkt festlegen"
+            android:layout_weight="0.50"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttonLayout"
-        android:layout_below="@id/waypoint_time"
+        android:layout_below="@id/arrivalLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
             android:text="@string/buttonCalculator"
-            android:id="@+id/calculatorButton"
-            />
+            android:id="@+id/calculatorButton" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
             android:id="@+id/nextWaypointButton"
-            android:text="@string/buttonNextWaypoint"
-            android:onClick="showTimePickerDialog"/>
+            android:text="@string/buttonNextWaypoint" />
     </LinearLayout>
     <LinearLayout
         android:layout_below="@id/buttonLayout"
@@ -129,6 +100,7 @@
             android:text="@string/buttonCalculate"/>
 
     </LinearLayout>
+
 
 
 </RelativeLayout>

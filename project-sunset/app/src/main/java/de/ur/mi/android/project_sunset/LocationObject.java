@@ -1,10 +1,12 @@
 package de.ur.mi.android.project_sunset;
 
+import java.io.Serializable;
+
 /**
  * Object which contains all necessary information for a position
  */
 
-public class LocationObject {
+public class LocationObject implements Serializable{
 
     //Time is given in seconds
     private String name;
