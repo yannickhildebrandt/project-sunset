@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 public class LocationObject implements Serializable{
 
-    //Time is given in seconds
     private String name;
     private Float longitude;
     private Float latitude;

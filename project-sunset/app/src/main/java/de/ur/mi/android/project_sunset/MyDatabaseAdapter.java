@@ -18,18 +18,7 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
     public static final String DB_NAME = "waypoints.db";
     public static final int DB_VERSION = 1;
 
-    // Relationenmodell
-    // 3 Spalten in der Tabelle my-example-table
-    // _id, first-example, second-example
-    public static final String TABLE_EXAMPLE = "waypointTable";
-    public static final String KEY_ID = "_id";
-    public static final String KEY_IDENT = "ident";
-    public static final String KEY_LATITUDE = "latitude";
-    public static final String KEY_LONGITUDE = "longitude";
-    public static final String KEY_TYPE = "type";
-
     public MyDatabaseAdapter(Context context) {
-        //helper = new MyDatabaseHelper(context, DB_NAME, null, DB_VERSION);
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -62,7 +51,7 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
             return result;
         }
         catch (Exception e) {
-            Log.d("CREATION",e.toString());
+            Log.d("ZZZ",e.toString());
         }
         return null;
     }

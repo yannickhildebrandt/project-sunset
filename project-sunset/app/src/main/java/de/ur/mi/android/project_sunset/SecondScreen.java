@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MONTH;
 
 public class SecondScreen extends AppCompatActivity {
     EditText waypointName;
@@ -92,6 +93,7 @@ public class SecondScreen extends AppCompatActivity {
                        Bundle args = new Bundle();
                        args.putSerializable(ARRAYLIST_EXTRA_ID, locList);
                        secondScreenIntent.putExtra(BUNDLE_EXTRA_ID, args);
+                       Toast.makeText(getBaseContext(), "Waypoint hinzugefügt!", Toast.LENGTH_SHORT).show();
                        startActivity(secondScreenIntent);
                    }
                }
@@ -146,6 +148,7 @@ public class SecondScreen extends AppCompatActivity {
 
     public void timePickerPopup() {
         Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+        cal.get(Calendar.MONTH);
         TimePickerDialog timePicker = new TimePickerDialog(this, R.style.AppTheme, datePickerListener, cal.get(HOUR_OF_DAY), cal.get(HOUR_OF_DAY), true);
         timePicker.setCancelable(false);
         timePicker.setTitle("Wähle die Ankunftszeit");
