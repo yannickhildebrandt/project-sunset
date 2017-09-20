@@ -22,6 +22,11 @@ public class AddWaypointScreen extends AppCompatActivity {
         setOnClick();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void setOnClick() {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

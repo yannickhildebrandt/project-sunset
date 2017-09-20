@@ -27,6 +27,7 @@ public class EntryScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
+                finish();
             }
         });
     }

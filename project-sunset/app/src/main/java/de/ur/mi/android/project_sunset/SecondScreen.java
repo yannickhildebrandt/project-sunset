@@ -66,15 +66,8 @@ public class SecondScreen extends AppCompatActivity {
     }
 
     private void setOnClickListener() {
-        final Intent calculatorIntent = new Intent(this,Calculator.class);
         final Intent secondScreenIntent = new Intent(this, SecondScreen.class);
         final Intent addWaypointIntent = new Intent(this, AddWaypointScreen.class);
-        calculatorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(calculatorIntent);
-            }
-        });
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +139,6 @@ public class SecondScreen extends AppCompatActivity {
 
     private void initUI() {
         waypointName = (EditText) findViewById(R.id.WaypointNameEdit);
-        calculatorButton = (Button) findViewById(R.id.calculatorButton);
         nextWaypoint = (Button) findViewById(R.id.nextWaypointButton);
         calculateButton = (Button) findViewById(R.id.buttonCalculate);
         pickTime = (Button) findViewById(R.id.setTimeButton);
