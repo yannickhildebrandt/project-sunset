@@ -6,11 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * Created by yannickhildebrandt on 14/09/17.
- */
-
-
     public class Calculator extends AppCompatActivity {
         EditText gradEdit;
         EditText minutesEdit;

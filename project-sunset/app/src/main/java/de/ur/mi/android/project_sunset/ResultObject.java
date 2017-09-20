@@ -9,10 +9,10 @@ public class ResultObject {
     private int timeNoClouds;
     private int timeMediumClouds;
     private int timeManyClouds;
-    private long posLongitude;
-    private long posLatitude;
+    private double posLatitude;
+    private double posLongitude;
 
-    public ResultObject(int timeNoClouds, int timeMediumClouds, int timeManyClouds, long posLongitude, long posLatitude){
+    public ResultObject(int timeNoClouds, int timeMediumClouds, int timeManyClouds, double posLatitude, double posLongitude){
         this.timeNoClouds = timeNoClouds;
         this.timeMediumClouds = timeMediumClouds;
         this.timeManyClouds = timeManyClouds;

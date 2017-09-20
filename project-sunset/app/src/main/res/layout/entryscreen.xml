@@ -9,15 +9,7 @@
         android:id="@+id/startImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/flip" />
-    <TextView
-        android:layout_alignBottom="@id/startImage"
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="Berühren zum Fortfahren" />
-
-
-
+        android:src="@drawable/screen"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"/>
 </RelativeLayout>

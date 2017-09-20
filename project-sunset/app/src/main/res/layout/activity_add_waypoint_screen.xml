@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.ur.mi.android.project_sunset.AddWaypointScreen">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWaypointDescription"
+        android:text="@string/labelAddWaypointDescription"
+        android:layout_marginTop="13dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWaypointName"
+        android:layout_below="@+id/addWaypointDescription"
+        android:layout_marginTop="13dp"
+        android:hint="@string/hintAddWaypointName"
+        android:inputType="textCapCharacters"  />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWaypointLatitude"
+        android:layout_below="@+id/addWaypointName"
+        android:layout_marginTop="24dp"
+        android:hint="@string/hintAddWaypointLatitude"
+        android:inputType="numberDecimal|numberSigned"  />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWaypointLongitude"
+        android:layout_below="@+id/addWaypointLatitude"
+        android:hint="@string/hintAddWaypointLongitude"
+        android:inputType="numberDecimal|numberSigned"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWaypointButton"
+        android:layout_below="@id/addWaypointLongitude"
+        android:layout_marginTop="13dp"
+        android:text="@string/buttonAddWaypoint" />
+
+</RelativeLayout>

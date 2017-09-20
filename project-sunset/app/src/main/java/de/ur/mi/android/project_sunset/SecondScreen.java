@@ -24,12 +24,11 @@ import static java.util.Calendar.MONTH;
 
 public class SecondScreen extends AppCompatActivity {
     EditText waypointName;
-    EditText waypointLongitude;
-    EditText waypointLatitude;
     Button calculatorButton;
     Button nextWaypoint;
     Button calculateButton;
     Button pickTime;
+    Button addFavourite;
     TextView arrivalTimeText;
 
     private final static String ARRAYLIST_EXTRA_ID = "ArraylistExtra";
@@ -49,7 +48,6 @@ public class SecondScreen extends AppCompatActivity {
         initLocationList();
 
         //Platzhalter bis Timepicker implementiert ist
-        arrivalTimeInSec = -1;
     }
 
     private void initLocationList() {
@@ -70,6 +68,7 @@ public class SecondScreen extends AppCompatActivity {
     private void setOnClickListener() {
         final Intent calculatorIntent = new Intent(this,Calculator.class);
         final Intent secondScreenIntent = new Intent(this, SecondScreen.class);
+        final Intent addWaypointIntent = new Intent(this, AddWaypointScreen.class);
         calculatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +78,10 @@ public class SecondScreen extends AppCompatActivity {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkCorrectInput()) {}
+                if (checkCorrectInput()) {
+                    TimeCalculator tc = new TimeCalculator();
+                    ResultObject result = tc.calculateResult(locList);
+                }
             }
         });
         nextWaypoint.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +99,13 @@ public class SecondScreen extends AppCompatActivity {
                        startActivity(secondScreenIntent);
                    }
                }
+            }
+        });
+
+        addFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(addWaypointIntent);
             }
         });
 
@@ -137,13 +146,12 @@ public class SecondScreen extends AppCompatActivity {
 
     private void initUI() {
         waypointName = (EditText) findViewById(R.id.WaypointNameEdit);
-        waypointLongitude = (EditText) findViewById(R.id.waypointLongitudeEdit);
-        waypointLatitude = (EditText) findViewById(R.id.waypointLatitudeEdit);
         calculatorButton = (Button) findViewById(R.id.calculatorButton);
         nextWaypoint = (Button) findViewById(R.id.nextWaypointButton);
         calculateButton = (Button) findViewById(R.id.buttonCalculate);
         pickTime = (Button) findViewById(R.id.setTimeButton);
         arrivalTimeText = (TextView) findViewById(R.id.arrivaltime);
+        addFavourite = (Button) findViewById(R.id.waypointAddToFavourite);
     }
 
     public void timePickerPopup() {

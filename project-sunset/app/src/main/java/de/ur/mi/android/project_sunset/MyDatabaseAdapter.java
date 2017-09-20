@@ -17,6 +17,7 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
     // Datenbanksetup
     public static final String DB_NAME = "waypoints.db";
     public static final int DB_VERSION = 1;
+    String tableNamewaypoints = "waypoints";
 
     public MyDatabaseAdapter(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -38,14 +39,13 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
      * @return a WaypointObject with all information for the selected waypoint
      */
     public WaypointObject getWaypointObjectByName(String name) {
-        String tableName = "waypoints";
         String[] tableColumns = new String[] {"ID" , "IDENT", "LATITUDE", "LONGITUDE", "TYPE"};
         String whereClause = "IDENT = ?";
         String[] whereArgs = new String[] {name};
         String oderBy = "ID";
 
         try {
-            Cursor c = db.query(tableName, tableColumns, whereClause, whereArgs, null, null, oderBy);
+            Cursor c = db.query(tableNamewaypoints, tableColumns, whereClause, whereArgs, null, null, oderBy);
             if (c != null) {c.moveToFirst();}
             WaypointObject result = new WaypointObject(Integer.parseInt(c.getString(0)), c.getString(1), Float.parseFloat(c.getString(2)), Float.parseFloat(c.getString(3)), c.getString(4));
             return result;
@@ -54,6 +54,22 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
             Log.d("ZZZ",e.toString());
         }
         return null;
+    }
+
+    public boolean addWaypoint (String name, String longitude, String latitude) {
+        ContentValues content = new ContentValues();
+        content.put("IDENT", name);
+        content.put("LATITUDE", latitude);
+        content.put("LONGITUDE", longitude);
+        content.put("TYPE", "custom");
+        content.put("ID", "999999");
+
+        try {
+            db.insert(tableNamewaypoints, null, content);
+            return true;
+        }
+        catch (Exception e) {Log.e("ZZZ", e.toString());}
+        return false;
     }
 
 }

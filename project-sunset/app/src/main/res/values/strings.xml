@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">project-sunset</string>
+    <string name="app_name">Suntime Calculator</string>
+
     <string name="entry_button">Neue Berechnung starten</string>
     <string name="sunset">Sonnenaufgang</string>
     <string name="sundown">Sonnenuntergang</string>
     <string name="informationWaypoint">Informationen für diesen Waypoint eingeben</string>
     <string name="hintWaypoint">Name des Waypoints</string>
-    <string name="hintLatitude">Breitengrad des Waypoints</string>
-    <string name="hintLongitude">Längengrad des Waypoints</string>
     <string name="hintTime">Zeitpunkt des Erreichens</string>
     <string name="buttonCalculator">Umrechner</string>
     <string name="buttonNextWaypoint">Nächster Waypoint</string>
@@ -21,4 +20,12 @@
     <string name="textFewClouds">Bei mäßiger Bewölkung: </string>
     <string name="textClouds">Bei starker Bewölkung: </string>
     <string name="textPosition">Position bei Sonnenaufgang: </string>
+    <string name="buttonFavourite">Neuen Waypoint hinzufügen</string>
+    <string name="buttonPickTime">Zeitpunkt festlegen</string>
+    <string name="labelTimePicked">Zeitpunkt des Erreichens: </string>
+    <string name="labelAddWaypointDescription">Fügen Sie einen Waypoint zu der Datenbank hinzu:</string>
+    <string name="hintAddWaypointName">Name des Waypoints</string>
+    <string name="hintAddWaypointLatitude">Breitengrad des Waypoints</string>
+    <string name="hintAddWaypointLongitude">Längengrad des Waypoints</string>
+    <string name="buttonAddWaypoint">Hinzufügen</string>
 </resources>
