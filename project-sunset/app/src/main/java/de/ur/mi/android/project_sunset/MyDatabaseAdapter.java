@@ -16,8 +16,9 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
 
     // Datenbanksetup
     public static final String DB_NAME = "waypoints.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
     String tableNamewaypoints = "waypoints";
+    String tableSuntime = "suntime";
 
     public MyDatabaseAdapter(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -71,5 +72,21 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
         catch (Exception e) {Log.e("ZZZ", e.toString());}
         return false;
     }
+
+    public int getSunriseTime (double lat, int day) {
+        String[] tableColumns = new String[] {"Sonnenaufgang"};
+        String whereClause = "Breitengrad = ? AND Tag = ?";
+        String[] whereArgs = new String[] {Double.toString(lat), Integer.toString(day)};
+        String oderBy = "Tag";
+        try {
+            Cursor c = db.query(tableSuntime, tableColumns, whereClause, whereArgs, null, null, oderBy);
+            if (c != null) {c.moveToFirst();}
+            Log.e("ZZZ", "QueryResult: " + c.getString(0));
+            return Integer.parseInt(c.getString(0));
+        }
+        catch (Exception e) {
+            Log.d("ZZZ",e.toString());
+        }
+        return -1;}
 
 }

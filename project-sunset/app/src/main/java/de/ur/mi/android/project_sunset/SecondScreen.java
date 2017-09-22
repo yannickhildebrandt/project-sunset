@@ -24,7 +24,6 @@ import static java.util.Calendar.MONTH;
 
 public class SecondScreen extends AppCompatActivity {
     EditText waypointName;
-    Button calculatorButton;
     Button nextWaypoint;
     Button calculateButton;
     Button pickTime;
@@ -72,7 +71,7 @@ public class SecondScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkCorrectInput()) {
-                    TimeCalculator tc = new TimeCalculator();
+                    TimeCalculator tc = new TimeCalculator(getApplicationContext());
                     ResultObject result = tc.calculateResult(locList);
                 }
             }
@@ -148,7 +147,6 @@ public class SecondScreen extends AppCompatActivity {
 
     public void timePickerPopup() {
         Calendar cal = Calendar.getInstance(TimeZone.getDefault());
-        cal.get(Calendar.MONTH);
         TimePickerDialog timePicker = new TimePickerDialog(this, R.style.AppTheme, datePickerListener, cal.get(HOUR_OF_DAY), cal.get(HOUR_OF_DAY), true);
         timePicker.setCancelable(false);
         timePicker.setTitle("Wähle die Ankunftszeit");

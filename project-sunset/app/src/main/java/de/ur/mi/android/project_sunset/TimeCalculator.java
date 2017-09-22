@@ -1,18 +1,23 @@
 package de.ur.mi.android.project_sunset;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
-public class TimeCalculator extends Application{
+public class TimeCalculator {
 
     private boolean sunrise = false;
     private boolean sunset = false;
     private int index = -1;
 
     TimeCalculator mCurrentInstance;
+    Context context;
+    Calendar cal;
 
     double newLatitude;
     double newLongitude;
@@ -23,18 +28,10 @@ public class TimeCalculator extends Application{
 
     private static final int NOON_TIME = 43200;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-       mCurrentInstance = this;
+    public TimeCalculator(Context context){
+        this.context = context;
+        cal = Calendar.getInstance(TimeZone.getDefault());
     }
-
-
-
-        //Platzhalter bis Timepicker implementiert ist
-
-
 
     public ResultObject calculateResult(ArrayList<LocationObject> locationList){
         int timeNoClouds = calculateTime(locationList, NO_CLOUDS);
@@ -53,10 +50,8 @@ public class TimeCalculator extends Application{
                 index = checkForSunset(locationList, param);
                 sunset = true;
             }
-        if (index == -1) {
-            System.out.println("Es findet kein Sonnenaufgang bzw. Sonnenuntergang statt");
-            return -1;
-        }
+        if (index == -1) {return -1;}
+
         LocationObject loc1 = locationList.get(index-1);
         LocationObject loc2 = locationList.get(index);
         int deltaLoc1 = loc1.getArrivalTime() - loc1.getSunriseTime() + (int) (loc1.getModifierValue() * param);
@@ -72,8 +67,15 @@ public class TimeCalculator extends Application{
     }
 
     private void getTimeByWaypoint(double lat, double lng, double param) {
-        //Platzhalter
-        MyDatabaseAdapter mda = new MyDatabaseAdapter(mCurrentInstance);
+        Log.e("ZZZ", "Latitude: " + lat + ", Longitude: " + lng);
+        try {
+            MyDatabaseAdapter mda = new MyDatabaseAdapter(context);
+            mda.open();
+            Log.e("ZZZ", "Sunrise: " + mda.getSunriseTime(Math.round(lat), cal.get(Calendar.DAY_OF_MONTH)));
+            mda.close();
+        }
+        catch (Exception e){Log.e("ZZZ", e.toString());}
+        //Log.e("ZZZ", "Sunrise" + mda.getSunriseTime(Math.round(lat), cal.get(Calendar.DAY_OF_MONTH)));
     }
 
     private int checkForSunrise(ArrayList<LocationObject> locationList, double modifier) {
