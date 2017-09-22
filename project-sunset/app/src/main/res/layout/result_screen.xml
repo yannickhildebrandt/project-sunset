@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundFlatUIdark"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -11,7 +10,6 @@
         android:text="@string/resultSunsetTitle"
         android:layout_weight="0.10"
         android:layout_marginTop="30dp"
-        android:textColor="@color/TextFlatUIWhite"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -23,14 +21,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/noCloudsText"
             android:text="@string/textNoClouds"
-            android:textColor="@color/TextFlatUIWhite"
 
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/noCloudsResult"
-            android:textColor="@color/TextFlatUIWhite"
             />
     </LinearLayout>
     <LinearLayout
@@ -43,12 +39,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/fewCloudsText"
             android:text="@string/textFewClouds"
-            android:textColor="@color/TextFlatUIWhite"/>
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fewCloudsResult"
-            android:textColor="@color/TextFlatUIWhite"
             />
         </LinearLayout>
     <LinearLayout
@@ -60,13 +55,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cloudsText"
-            android:text="@string/textClouds"
-            android:textColor="@color/TextFlatUIWhite"/>
+            android:text="@string/textClouds" />
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cloudsResult"
-            android:textColor="@color/TextFlatUIWhite"/>
+        android:id="@+id/cloudsResult" />
         </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -78,13 +71,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/positionText"
             android:text="@string/textPosition"
-            android:textColor="@color/TextFlatUIWhite"
             />
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/positionResult"
-            android:textColor="@color/TextFlatUIWhite"
         />
         </LinearLayout>
 

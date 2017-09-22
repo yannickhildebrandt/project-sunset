@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroundFlatUIdark">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/informationWaypoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/informationWaypoint"
+        android:textColor="@android:color/black"
         android:layout_margin="13dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/TextFlatUIWhite"/>
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -24,10 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="13dp"
-        android:layout_margin="13dp"
-        android:textColor="@color/TextFlatUIWhite"
-        android:textColorHint="@color/TextFlatUIWhite"
- />
+        android:layout_margin="13dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -35,8 +31,7 @@
         android:id="@+id/waypointAddToFavourite"
         android:layout_below="@+id/WaypointNameEdit"
         android:text="@string/buttonFavourite"
-        android:layout_margin="13dp"
-        android:textColor="@color/TextFlatUIWhite"/>
+        android:layout_margin="13dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +47,6 @@
             android:text="@string/labelTimePicked"
             android:layout_weight="0.50"
             android:layout_margin="13dp"
-            android:textColor="@color/TextFlatUIWhite"
             />
         <Button
             android:layout_width="wrap_content"
@@ -60,9 +54,7 @@
             android:id="@+id/setTimeButton"
             android:text="@string/buttonPickTime"
             android:layout_weight="0.50"
-            android:layout_margin="13dp"
-
-            android:textColor="@color/TextFlatUIWhite"/>
+            android:layout_margin="13dp"/>
 
     </LinearLayout>
 
@@ -77,9 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
             android:id="@+id/nextWaypointButton"
-            android:text="@string/buttonNextWaypoint"
-
-            android:textColor="@color/TextFlatUIWhite"/>
+            android:text="@string/buttonNextWaypoint" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,9 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
-            android:text="@string/buttonCalculate"
-
-            android:textColor="@color/TextFlatUIWhite"/>
+            android:text="@string/buttonCalculate"/>
 
     </LinearLayout>
 

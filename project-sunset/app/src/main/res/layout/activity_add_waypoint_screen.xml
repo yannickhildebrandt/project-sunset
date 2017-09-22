@@ -5,16 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.ur.mi.android.project_sunset.AddWaypointScreen"
-    android:layout_marginTop="24dp"
-    android:background="@color/backgroundFlatUIdark">
+    android:layout_marginTop="24dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addWaypointDescription"
         android:text="@string/labelAddWaypointDescription"
-        android:layout_margin="13dp"
-        android:textColor="@color/TextFlatUIWhite"/>
+        android:layout_margin="13dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -23,9 +21,7 @@
         android:layout_below="@+id/addWaypointDescription"
         android:layout_margin="13dp"
         android:hint="@string/hintAddWaypointName"
-        android:inputType="textCapCharacters"
-        android:textColor="@color/TextFlatUIWhite"
-        android:textColorHint="@color/TextFlatUIWhite"/>
+        android:inputType="textCapCharacters"  />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,9 +37,7 @@
         android:id="@+id/addWaypointLatitude"
         android:layout_marginTop="13dp"
         android:hint="@string/hintAddWaypointLatitude"
-        android:inputType="numberDecimal|numberSigned"
-        android:textColor="@color/TextFlatUIWhite"
-        android:textColorHint="@color/TextFlatUIWhite"/>
+        android:inputType="numberDecimal|numberSigned"  />
 
     <EditText
         android:layout_width="match_parent"
@@ -52,9 +46,7 @@
         android:hint="@string/hintAddWaypointLongitude"
         android:inputType="numberDecimal|numberSigned"
         android:layout_marginTop="13dp"
-        android:layout_marginBottom="13dp"
-        android:textColor="@color/TextFlatUIWhite"
-        android:textColorHint="@color/TextFlatUIWhite"/>
+        android:layout_marginBottom="13dp"/>
 
     </LinearLayout>
 
@@ -64,8 +56,6 @@
         android:id="@+id/addWaypointButton"
         android:layout_below="@id/longLatLayout"
         android:layout_margin="13dp"
-        android:text="@string/buttonAddWaypoint"
-        android:background="@color/buttonFlatUIblue"
-        android:textColor="@color/TextFlatUIWhite"/>
+        android:text="@string/buttonAddWaypoint" />
 
 </RelativeLayout>

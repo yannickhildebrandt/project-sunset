@@ -19,25 +19,4 @@ public class ResultObject {
         this.posLongitude = posLongitude;
         this.posLatitude = posLatitude;
     }
-
-    public double getPosLatitude() {
-        return posLatitude;
-    }
-
-    public double getPosLongitude() {
-        return posLongitude;
-    }
-
-    public int getTimeManyClouds() {
-        return timeManyClouds;
-    }
-
-    public int getTimeMediumClouds() {
-        return timeMediumClouds;
-    }
-
-    public int getTimeNoClouds() {
-        return timeNoClouds;
-    }
-
 }
