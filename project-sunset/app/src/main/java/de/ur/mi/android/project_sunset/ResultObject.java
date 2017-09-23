@@ -1,5 +1,9 @@
 package de.ur.mi.android.project_sunset;
 
+/**
+ * an object to store a result of the TimeCalculator operations
+ */
+
 public class ResultObject {
 
     private int timeNoClouds;
@@ -8,6 +12,13 @@ public class ResultObject {
     private double posLatitude;
     private double posLongitude;
 
+    /**
+     * @param timeNoClouds Sunrise/sunset with no clouds in seconds
+     * @param timeMediumClouds Sunrise/sunset with some clouds in seconds
+     * @param timeManyClouds Sunrise/sunset with many clouds in seconds
+     * @param posLatitude latitude of position of sunrise/sunset
+     * @param posLongitude longitude of position of sunrise/sunset
+     */
     public ResultObject(int timeNoClouds, int timeMediumClouds, int timeManyClouds, double posLatitude, double posLongitude){
         this.timeNoClouds = timeNoClouds;
         this.timeMediumClouds = timeMediumClouds;

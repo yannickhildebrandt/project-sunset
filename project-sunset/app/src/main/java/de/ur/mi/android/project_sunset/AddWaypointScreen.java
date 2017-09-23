@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * a new screen to give the user the ability to add own waypoints to the waypoints.db
+ */
+
 public class AddWaypointScreen extends AppCompatActivity {
 
     EditText nameEdit;
@@ -31,6 +35,7 @@ public class AddWaypointScreen extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks input
                 if (nameEdit.getText().toString().length() != 5) {Toast.makeText(getBaseContext(), "Name muss 5 Zeichen lang sein!", Toast.LENGTH_SHORT).show();}
                 else if (latitudeEdit.getText().toString().length() == 0) {Toast.makeText(getBaseContext(), "Breitengrad darf nicht leer sein!", Toast.LENGTH_SHORT).show();}
                 else if (longitudeEdit.getText().toString().length() == 0) {Toast.makeText(getBaseContext(), "Längengrad darf nicht leer sein!", Toast.LENGTH_SHORT).show();}
@@ -39,6 +44,9 @@ public class AddWaypointScreen extends AppCompatActivity {
         });
     }
 
+    /**
+     * checks if waypoint already exists and adds a new waypoint to the waypoints.db
+     */
     private void addWaypoint() {
         MyDatabaseAdapter mda = new MyDatabaseAdapter(getApplicationContext());
         mda.open();
@@ -48,6 +56,9 @@ public class AddWaypointScreen extends AppCompatActivity {
         mda.close();
     }
 
+    /**
+     * refernces the UI-elements
+     */
     private void initUI() {
         nameEdit = (EditText) findViewById(R.id.addWaypointName);
         latitudeEdit = (EditText) findViewById(R.id.addWaypointLatitude);

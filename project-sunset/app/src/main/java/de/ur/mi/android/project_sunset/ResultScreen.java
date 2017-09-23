@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * shows the the results of the calculation in a dedicated screen
+ */
+
 public class ResultScreen extends AppCompatActivity {
 
     int timeManyClouds;
@@ -27,6 +31,15 @@ public class ResultScreen extends AppCompatActivity {
         setResults();
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, SecondScreen.class));
+        finish();
+    }
+
+    /**
+     * sets the reuslts to the textviews
+     */
     private void setResults() {
         noCloudsText.setText(Integer.toString(timeNoClouds));
         mediumCloudsText.setText(Integer.toString(timeMediumClouds));
@@ -34,6 +47,9 @@ public class ResultScreen extends AppCompatActivity {
         positionText.setText("" + Double.toString(latitude) + " " + Double.toString(longitude));
     }
 
+    /**
+     * gets all extras from the intent
+     */
     private void initExtras() {
         Intent i = getIntent();
         timeManyClouds = i.getIntExtra("manyClouds", -1);
@@ -43,6 +59,9 @@ public class ResultScreen extends AppCompatActivity {
         longitude = i.getDoubleExtra("longitude", -1);
     }
 
+    /**
+     * references the UI-elements
+     */
     private void initUI() {
         noCloudsText = (TextView) findViewById(R.id.noCloudsResult);
         mediumCloudsText = (TextView) findViewById(R.id.fewCloudsResult);
