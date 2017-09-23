@@ -4,23 +4,21 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import static java.util.Calendar.HOUR_OF_DAY;
-import static java.util.Calendar.MONTH;
+
 
 public class SecondScreen extends AppCompatActivity {
     EditText waypointName;
@@ -202,7 +200,9 @@ public class SecondScreen extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             arrivalTimeInSec = (selectedHour * 3600) + (selectedMinute * 60);
             String hour = String.valueOf(selectedHour);
+            if (selectedHour < 10) {hour = "0" + hour;}
             String minute = String.valueOf(selectedMinute);
+            if (selectedMinute <10) {minute = "0" + selectedMinute;}
             arrivalTimeText.setText("Zeitpunkt des Erreichens: " + hour + ":" + minute);
         }
     };
