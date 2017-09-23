@@ -16,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondScreen"></activity>
+        <activity android:name=".SecondScreen" />
         <activity android:name=".Calculator" />
-        <activity android:name=".AddWaypointScreen"></activity>
+        <activity android:name=".AddWaypointScreen" />
+        <activity android:name=".ResultScreen"></activity>
     </application>
 
 </manifest>

@@ -45,8 +45,6 @@ public class SecondScreen extends AppCompatActivity {
         setOnClickListener();
         if (getIntent().getExtras() == null) {calculateButton.setEnabled(false);}
         initLocationList();
-
-        //Platzhalter bis Timepicker implementiert ist
     }
 
     private void initLocationList() {
@@ -67,12 +65,20 @@ public class SecondScreen extends AppCompatActivity {
     private void setOnClickListener() {
         final Intent secondScreenIntent = new Intent(this, SecondScreen.class);
         final Intent addWaypointIntent = new Intent(this, AddWaypointScreen.class);
+        final Intent resultScreenIntnt = new Intent(this, ResultScreen.class);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkCorrectInput()) {
                     TimeCalculator tc = new TimeCalculator(getApplicationContext());
                     ResultObject result = tc.calculateResult(locList);
+                    resultScreenIntnt.putExtra("manyClouds", result.getTimeManyClouds());
+                    resultScreenIntnt.putExtra("mediumClouds", result.getTimeMediumClouds());
+                    resultScreenIntnt.putExtra("noClouds", result.getTimeNoClouds());
+                    resultScreenIntnt.putExtra("latitude", result.getPosLatitude());
+                    resultScreenIntnt.putExtra("longitude", result.getPosLongitude());
+                    startActivity(resultScreenIntnt);
+                    Log.e("ZZZ", "Resultobject: " + result.toString());
                 }
             }
         });
@@ -110,22 +116,24 @@ public class SecondScreen extends AppCompatActivity {
     }
 
     private LocationObject createLocationObject() {
+        int currentDay = Calendar.getInstance(TimeZone.getDefault()).get(Calendar.DAY_OF_MONTH);
         String name = waypointName.getText().toString().toUpperCase();
         MyDatabaseAdapter mda = new MyDatabaseAdapter(this);
         mda.open();
         WaypointObject loc = mda.getWaypointObjectByName(name);
-        mda.close();
         if (loc == null) {Toast.makeText(getBaseContext(), "Waypoint wurde nicht gefunden!", Toast.LENGTH_SHORT).show();}
         else {
-            Float longitude = loc.getLongitude();
-            Float latitude = loc.getLatitude();
-            //Beispielwerte
-            int one = -1;
-            int two = -1;
-            int three = arrivalTimeInSec;
-            int four = -1;
-            return new LocationObject(name, longitude, latitude, one, two, three ,four);
+            double longitude = loc.getLongitude();
+            double latitude = loc.getLatitude();
+            int sunrise = mda.getSunriseTime(Math.round(latitude), currentDay);
+            int sunset = mda.getSunsetTime(Math.round(latitude), currentDay);
+            int mod = mda.getModifier(Math.round(latitude), currentDay);
+            mda.close();
+            LocationObject temp = new LocationObject(name, longitude, latitude, sunrise, sunset, arrivalTimeInSec , mod);
+            Log.e("ZZZ", "LocObj: " + temp.toString());
+            return temp;
         }
+        mda.close();
         return null;
     }
 

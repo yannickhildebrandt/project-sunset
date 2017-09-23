@@ -3,11 +3,11 @@ package de.ur.mi.android.project_sunset;
 public class WaypointObject {
     private int id;
     private String ident;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private String type;
 
-    public WaypointObject(int id, String ident, float latitude, float longitude, String type){
+    public WaypointObject(int id, String ident, double latitude, double longitude, String type){
         this.id = id;
         this.ident = ident;
         this.latitude = latitude;
@@ -16,11 +16,11 @@ public class WaypointObject {
 
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

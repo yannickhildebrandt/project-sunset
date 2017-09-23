@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class LocationObject implements Serializable{
 
     private String name;
-    private Float longitude;
-    private Float latitude;
+    private double longitude;
+    private double latitude;
     private int sunriseTime;
     private int sunsetTime;
     private int arrivalTime;
@@ -26,7 +26,7 @@ public class LocationObject implements Serializable{
      * @param modifierValue A modifier depending on the current weather situation
      */
 
-    public LocationObject(String name, Float longitude, Float latitude, int sunriseTime, int sunsetTime, int arrivalTime, int modifierValue){
+    public LocationObject(String name, double longitude, double latitude, int sunriseTime, int sunsetTime, int arrivalTime, int modifierValue){
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -38,9 +38,9 @@ public class LocationObject implements Serializable{
 
     public String getName() {return name;}
 
-    public Float getLongitude() {return longitude;}
+    public double getLongitude() {return longitude;}
 
-    public Float getLatitude() {return latitude;}
+    public double getLatitude() {return latitude;}
 
     public int getSunriseTime() {return sunriseTime;}
 

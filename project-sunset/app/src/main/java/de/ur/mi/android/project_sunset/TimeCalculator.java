@@ -3,6 +3,7 @@ package de.ur.mi.android.project_sunset;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class TimeCalculator {
     private boolean sunset = false;
     private int index = -1;
 
-    TimeCalculator mCurrentInstance;
     Context context;
     Calendar cal;
 
@@ -62,19 +62,26 @@ public class TimeCalculator {
         double deltaLongitude = loc1.getLongitude() - loc2.getLongitude();
         newLatitude = loc1.getLatitude() + (deltaLatitude * deltaLocationFraction);
         newLongitude = loc1.getLongitude() + (deltaLongitude * deltaLocationFraction);
-        getTimeByWaypoint(newLatitude, newLongitude, param);
-        return -1;
+        return getTimeByWaypoint(newLatitude, newLongitude, param);
     }
 
-    private void getTimeByWaypoint(double lat, double lng, double param) {
+    private int getTimeByWaypoint(double lat, double lng, double param) {
         Log.e("ZZZ", "Latitude: " + lat + ", Longitude: " + lng);
+        int result = -1;
+        int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+        int modifier = 0;
         try {
             MyDatabaseAdapter mda = new MyDatabaseAdapter(context);
             mda.open();
-            Log.e("ZZZ", "Sunrise: " + mda.getSunriseTime(Math.round(lat), cal.get(Calendar.DAY_OF_MONTH)));
+            if (sunrise) {result = mda.getSunriseTime(Math.round(lat), currentDay);}
+            else if (sunset) {result = mda.getSunsetTime(Math.round(lat), currentDay);}
+            if (result != -1) {modifier = mda.getModifier(Math.round(lat), currentDay);}
             mda.close();
+            Log.e("ZZZ", "Result after query" + result);
+            result =  result + (int) ((double) modifier * param);
         }
         catch (Exception e){Log.e("ZZZ", e.toString());}
+        return result;
         //Log.e("ZZZ", "Sunrise" + mda.getSunriseTime(Math.round(lat), cal.get(Calendar.DAY_OF_MONTH)));
     }
 

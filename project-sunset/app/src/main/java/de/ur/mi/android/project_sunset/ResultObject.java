@@ -1,9 +1,5 @@
 package de.ur.mi.android.project_sunset;
 
-/**
- * Created by Nils on 25.08.2017.
- */
-
 public class ResultObject {
 
     private int timeNoClouds;
@@ -19,4 +15,17 @@ public class ResultObject {
         this.posLongitude = posLongitude;
         this.posLatitude = posLatitude;
     }
+
+    public int getTimeNoClouds() {return timeNoClouds;}
+
+    public int getTimeMediumClouds() {return timeMediumClouds;}
+
+    public int getTimeManyClouds() {return timeManyClouds;}
+
+    public double getPosLatitude() {return posLatitude;}
+
+    public double getPosLongitude() {return posLongitude;}
+
+    @Override
+    public String toString(){return "" + timeNoClouds + " " + timeMediumClouds + " " + timeManyClouds + " " + posLatitude + " " + posLongitude;}
 }
