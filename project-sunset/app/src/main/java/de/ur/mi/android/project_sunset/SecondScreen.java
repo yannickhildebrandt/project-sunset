@@ -47,6 +47,12 @@ public class SecondScreen extends AppCompatActivity {
         initLocationList();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (locList.size() != 0){startActivity(new Intent(this, SecondScreen.class));}
+        else {finish();}
+    }
+
     /**
      * checks if a ArrayList<LocationObject> has been passed. If not, a new Arraylist is created
      * This ArrayList to generate a list of Waypoints, which can be passed to the next Intent
@@ -90,6 +96,7 @@ public class SecondScreen extends AppCompatActivity {
                     resultScreenIntnt.putExtra("latitude", result.getPosLatitude());
                     resultScreenIntnt.putExtra("longitude", result.getPosLongitude());
                     startActivity(resultScreenIntnt);
+                    finish();
                 }
             }
         });
@@ -106,6 +113,7 @@ public class SecondScreen extends AppCompatActivity {
                        secondScreenIntent.putExtra(BUNDLE_EXTRA_ID, args);
                        Toast.makeText(getBaseContext(), "Waypoint hinzugefügt!", Toast.LENGTH_SHORT).show();
                        startActivity(secondScreenIntent);
+                       finish();
                    }
                }
             }
