@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * This class computes the exact sunrise/sunset of a list of waypoints with an iterative calculation
+ */
+
 public class TimeCalculator {
 
     private boolean sunrise = false;
@@ -19,8 +23,8 @@ public class TimeCalculator {
     Context context;
     Calendar cal;
 
-    double newLatitude;
-    double newLongitude;
+    double newLatitude = -1;
+    double newLongitude = -1;
 
     private static final double NO_CLOUDS = 0;
     private static final double MEDIUM_CLOUDS = 0.5;
@@ -33,6 +37,12 @@ public class TimeCalculator {
         cal = Calendar.getInstance(TimeZone.getDefault());
     }
 
+
+    /**
+     * iniator of the iterative calculation
+     * @param locationList a list of LocationObjects which represent the flight course
+     * @return a ResultObject with exact calculated times
+     */
     public ResultObject calculateResult(ArrayList<LocationObject> locationList){
         int timeNoClouds = calculateTime(locationList, NO_CLOUDS);
         int timeMediumClouds = calculateTime(locationList, MEDIUM_CLOUDS);
@@ -40,15 +50,23 @@ public class TimeCalculator {
         return new ResultObject(timeNoClouds, timeMediumClouds, timeManyClouds, newLatitude, newLongitude);
     }
 
+    /**
+     * calculates new position and specifies time calculation through a time modifier
+     * @param locationList a list of LocationObjects which represent the flight course
+     * @param param depends on the weather (many clouds, no clouds medium clouds)
+     * @return time in seconds of sunrise/sunset
+     */
     private int calculateTime(ArrayList<LocationObject> locationList, double param){
         LocationObject initialObject = locationList.get(0);
         if (initialObject.getArrivalTime() <= (initialObject.getSunriseTime() + initialObject.getModifierValue() * param) && initialObject.getArrivalTime() <= NOON_TIME) {
             index = checkForSunrise(locationList, param);
             sunrise = true;
+            Log.e("ZZZ", "sunrise");
         }
         else {
                 index = checkForSunset(locationList, param);
                 sunset = true;
+            Log.e("ZZZ", "sunset");
             }
         if (index == -1) {return -1;}
 
@@ -57,7 +75,7 @@ public class TimeCalculator {
         int deltaLoc1 = loc1.getArrivalTime() - loc1.getSunriseTime() + (int) (loc1.getModifierValue() * param);
         int deltaLoc2 = loc2.getArrivalTime() - loc2.getSunriseTime() + (int) (loc2.getModifierValue() * param);
         int deltaSum = Math.abs(deltaLoc1) + Math.abs(deltaLoc2);
-        double deltaLocationFraction = Math.abs(deltaSum / deltaLoc1);
+        double deltaLocationFraction = Math.abs((double) deltaLoc1 / deltaSum);
         double deltaLatitude = loc1.getLatitude() - loc2.getLatitude();
         double deltaLongitude = loc1.getLongitude() - loc2.getLongitude();
         newLatitude = loc1.getLatitude() + (deltaLatitude * deltaLocationFraction);
@@ -65,6 +83,13 @@ public class TimeCalculator {
         return getTimeByWaypoint(newLatitude, newLongitude, param);
     }
 
+    /**
+     * gets the new sunrise/sunset of the earlier new claculated position
+     * @param lat latitude of new position
+     * @param lng longitude of new position
+     * @param param depends on the weather (many clouds, no clouds medium clouds)
+     * @return time in seconds of sunset/sunrise
+     */
     private int getTimeByWaypoint(double lat, double lng, double param) {
         Log.e("ZZZ", "Latitude: " + lat + ", Longitude: " + lng);
         int result = -1;
@@ -77,7 +102,6 @@ public class TimeCalculator {
             else if (sunset) {result = mda.getSunsetTime(Math.round(lat), currentDay);}
             if (result != -1) {modifier = mda.getModifier(Math.round(lat), currentDay);}
             mda.close();
-            Log.e("ZZZ", "Result after query" + result);
             result =  result + (int) ((double) modifier * param);
         }
         catch (Exception e){Log.e("ZZZ", e.toString());}
@@ -85,15 +109,27 @@ public class TimeCalculator {
         //Log.e("ZZZ", "Sunrise" + mda.getSunriseTime(Math.round(lat), cal.get(Calendar.DAY_OF_MONTH)));
     }
 
+    /**
+     * checks if a sunrise occurs on the flight route
+     * @param locationList a list of LocationObjects which represent the flight course
+     * @param modifier depends on the weather (many clouds, no clouds medium clouds)
+     * @return position of the waypoint at which a sunrise occurs, else -1
+     */
     private int checkForSunrise(ArrayList<LocationObject> locationList, double modifier) {
-        for (int i = 1; i <= locationList.size(); i++) {
+        for (int i = 1; i <= locationList.size()-1; i++) {
             if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunriseTime() + (locationList.get(i).getModifierValue() * modifier))) {return i;}
         }
         return -1;
     }
 
+    /**
+     * checks if a sunset occurs on the flight route
+     * @param locationList a list of LocationObjects which represent the flight course
+     * @param modifier depends on the weather (many clouds, no clouds medium clouds)
+     * @return position of the waypoint at which a sunset occurs, else -1
+     */
     private int checkForSunset(ArrayList<LocationObject> locationList, double modifier) {
-        for (int i = 1; i <= locationList.size(); i++) {
+        for (int i = 1; i <= locationList.size()-1; i++) {
             if (locationList.get(i).getArrivalTime() >= (locationList.get(i).getSunsetTime() + (locationList.get(i).getModifierValue() * modifier))) {return i;}
         }
         return -1;

@@ -111,8 +111,8 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
     public int getSunsetTime (double lat, int day) {
         String[] tableColumns = new String[] {"Sonnenuntergang"};
         String whereClause = "Breitengrad = ? AND Tag = ?";
-        String[] whereArgs = new String[] {Double.toString(lat), Integer.toString(day)};
-        String oderBy = "Sonnenuntergang";
+        String[] whereArgs = new String[] {Integer.toString((int) lat), Integer.toString(day)};
+        String oderBy = "Tag";
         try {
             Cursor c = db.query(TABLE_SUNTIME, tableColumns, whereClause, whereArgs, null, null, oderBy);
             if (c != null) {
@@ -134,7 +134,7 @@ public class MyDatabaseAdapter extends SQLiteAssetHelper {
     public int getModifier (double lat, int day) {
         String[] tableColumns = new String[] {"Modifikator"};
         String whereClause = "Breitengrad = ? AND Tag = ?";
-        String[] whereArgs = new String[] {Double.toString(lat), Integer.toString(day)};
+        String[] whereArgs = new String[] {Integer.toString((int) lat), Integer.toString(day)};
         String oderBy = "Modifikator";
         try {
             Cursor c = db.query(TABLE_SUNTIME, tableColumns, whereClause, whereArgs, null, null, oderBy);

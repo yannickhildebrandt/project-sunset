@@ -19,7 +19,7 @@
     <string name="textNoClouds">Bei keiner Bewölkung: </string>
     <string name="textFewClouds">Bei mäßiger Bewölkung: </string>
     <string name="textClouds">Bei starker Bewölkung: </string>
-    <string name="textPosition">Position bei Sonnenaufgang: </string>
+    <string name="textPosition">Position: </string>
     <string name="buttonFavourite">Neuen Waypoint speichern</string>
     <string name="buttonPickTime">Zeitpunkt festlegen</string>
     <string name="labelTimePicked">Zeitpunkt des Erreichens: </string>
@@ -28,4 +28,5 @@
     <string name="hintAddWaypointLatitude">Breitengrad des Waypoints</string>
     <string name="hintAddWaypointLongitude">Längengrad des Waypoints</string>
     <string name="buttonAddWaypoint">Hinzufügen</string>
+    <string name="errorResult">Kein Sonnenaufgang/Sonnenuntergang</string>
 </resources>
