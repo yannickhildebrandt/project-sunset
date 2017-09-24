@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundFlatUIdark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultScreenTitle"
+        android:text="@string/resultSunsetTitle"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="13dp"
+        android:textColor="@color/TextFlatUIWhite"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noCloudsText"
+            android:text="@string/textNoClouds"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noCloudsResult"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fewCloudsText"
+            android:text="@string/textFewClouds"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fewCloudsResult"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cloudsText"
+            android:text="@string/textClouds"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cloudsResult"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/positionText"
+            android:text="@string/textPosition"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/positionResult"
+            android:layout_margin="13dp"
+            android:textColor="@color/TextFlatUIWhite"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

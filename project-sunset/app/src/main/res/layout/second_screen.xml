@@ -31,17 +31,16 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/waypointAddToFavourite"
+        android:id="@+id/nextWaypointButton"
         android:layout_below="@+id/WaypointNameEdit"
-        android:text="@string/buttonFavourite"
-        android:layout_margin="13dp"
+        android:text="@string/buttonNextWaypoint"
         android:textColor="@color/TextFlatUIWhite"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/arrivalLayout"
-        android:layout_below="@id/waypointAddToFavourite"
+        android:layout_below="@id/nextWaypointButton"
         android:layout_marginTop="24dp">
 
         <TextView
@@ -71,13 +70,16 @@
         android:layout_margin="13dp"
         android:layout_below="@+id/arrivalLayout"
         android:text="@string/buttonNextWaypoint">
+
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
-            android:id="@+id/nextWaypointButton"
-            android:text="@string/buttonNextWaypoint"
+            android:id="@+id/waypointAddToFavourite"
+            android:text="@string/buttonFavourite"
+
             android:textColor="@color/TextFlatUIWhite"/>
+
     </LinearLayout>
 
     <LinearLayout
